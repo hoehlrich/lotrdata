@@ -10,7 +10,7 @@ def load_csv(path):
     header = data.pop(0)
     return data, header
     
-def print_csv(data, header):
+def print_data(data, header):
     # Define template from header
     template = '{%s:<}' % (header[0])
 
@@ -35,13 +35,33 @@ def dictify_data(data: list, header, name='name'):
     for line in data:
         dict_data[line[header_dict[name]]] = {k: line[v] for k, v in header_dict.items()}
     
+    return dict_data
+
+def cleanup_dates(data: dict, dates=['birth', 'death']):
+    AGE_VALS = {
+        'FA': 4902,
+        'SA': 3441,
+        'TA': 3021
+    }
+
+    for line in data.values():
+        for age_name, age_val in AGE_VALS.items(5):
+            pass
+
+
+
 def main():
     data, header = load_csv('Assets/lotr_characters.csv')
-    print_csv(data, header)
+
+    # print_data(data, header)
+
     dict_data = dictify_data(data, header)
 
-    for name, line in dict_data.items():
-        print(f'{name}: {line}')
+    # for name, line in dict_data.items():
+        # print(f'{name}: {line}')
+
+    print(dict_data['Beren'])
+
 
 if __name__ == '__main__':
     main()
